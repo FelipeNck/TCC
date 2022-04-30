@@ -5,11 +5,10 @@
 }
 body {
     background-color: #75B6D6;
-    display: flex;
 }
 #baralho {
     height: 250px;
-    width: 640px;
+    width: 840px;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
@@ -17,7 +16,7 @@ body {
 .carta {
     width: 150px;
     height: 150px;
-    margin: 40px 30px;
+    margin: 10px 30px 60px;
     transform-style: preserve-3d;
     transition: 0.3s;
     position: relative;
@@ -30,7 +29,7 @@ body {
     border: 5px solid black;
     cursor: pointer;
 }
-.carta.flip {
+.carta.virada {
     transform: rotateY(180deg);
 }
 .frente {
@@ -38,4 +37,10 @@ body {
 }
 .verso {
     backface-visibility: hidden;
+}
+#mensagem {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: larger;
+    -webkit-text-stroke-width: thin;
 }

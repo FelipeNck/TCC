@@ -46,7 +46,7 @@
                 if(empty($_SESSION['valido'])):
             ?>
             <div class="opcao">
-                <img src="cadastrar.png"/><br>
+                <img src="./img/cadastrar.png"/><br>
                 <a href="cadastro.php" style="color: rgb(172, 228, 235);">Cadastrar-se</a> ou
                 <a href="login.php" style="color: rgb(172, 228, 235);">Realizar login</a>
             </div>
