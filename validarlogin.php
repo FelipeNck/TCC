@@ -13,7 +13,7 @@
     if ($row == 1){
         $_SESSION['valido'] = true;
         $_SESSION['id_email'] = $email;
-        header('Location: index.php');
+        header('Location: teste.php');
         exit;
     }else{
         $_SESSION['invalido'] = true;

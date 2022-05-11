@@ -15,14 +15,6 @@
 
     <body class="principal">
         <div id="conteudo">
-            <p>
-                Bem vindo ao nosso site! Aqui você poderá acessar o jogo da velha e no final ganhar uma pontuação de acordo com seu resultado.<br>
-                Sua pontuação será usada para competir com outros jogadores. Tente chegar ao primeiro lugar!    
-            </p>
-            <p>
-                Para ter acesso à sua pontuação e classificação, é preciso estar cadastrado.<br>
-                Note que jogar contra outro jogador não contribuirá para a sua pontuação.
-            </p><hr/>
             <?php
                 if(isset($_SESSION['valido'])):
                 $id_email = $_SESSION['id_email'];

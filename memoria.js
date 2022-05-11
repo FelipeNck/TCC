@@ -36,7 +36,7 @@ function embaralhaCartas(imagens) {
 }
 
 let primeiracarta, segundacarta;
-let tentativas = 0, erros = 0;
+let tentativas = 0, erros = 0, pontuacao = 0;
 
 function vira() {
     if (!block) {
@@ -49,7 +49,7 @@ function vira() {
                 block = true;
                 segundacarta =  this;
                 segundacarta = segundacarta.childNodes[0];
-                setTimeout('checaCarta(primeiracarta, segundacarta)', 1000);
+                setTimeout('checaCarta(primeiracarta, segundacarta)', 500);
             }
         } else {
             primeiracarta =  this;
@@ -64,10 +64,12 @@ function checaCarta(primeira, segunda){
 
     if (primeira.src != segunda.src) {
         erros += 1;
+        pontuacao -= 10;
         primeira.parentNode.classList.remove('virada');
         segunda.parentNode.classList.remove('virada');
         [primeiracarta, segundacarta] = [undefined, undefined];
     } else {
+        pontuacao += 100;
         [primeiracarta, segundacarta] = [undefined, undefined];
         checaVitoria()
     }
@@ -77,13 +79,30 @@ function checaVitoria() {
     let viradas = document.querySelectorAll('.carta.virada');
 
     if (viradas.length == imagens.length) {
-        let info = "Parabêns, Você conseguiu! <br> Tentativas: " + tentativas + "<br> Erros: " + erros
+        clearInterval(tempo);
+
+        let info = "Parabêns, Você conseguiu! <br> Tentativas: " + tentativas + "<br> Erros: " + erros + "<br> Pontuação: " + pontuacao + "<br>" + min + " : " + seg
         document.getElementById("mensagem").innerHTML = info
-        setTimeout('baralho()', 4000);
+        setTimeout(() => location.reload(), 4500);
+    }
+}
+
+let seg = 0, min = 0;
+
+function cronometro() {
+    if (seg < 60) {
+        console.log(min+' : '+seg);
+        seg++
+    } else {
+        min++
+        seg = 0;
     }
 }
 
 baralho()
+let tempo = setInterval(cronometro,1000);
 
 const a = document.querySelectorAll('.carta');
 a.forEach(a => a.addEventListener("click", vira));
+
+// colocar pontuação e tempo para ranking
