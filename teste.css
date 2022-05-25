@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
 }
+body {
+    background-color: #dcdde1;
+}
+
 header {
     height: 57px;
     background-color: rgb(68, 68, 68);
@@ -41,24 +45,10 @@ a {
     list-style: none;
     padding: 11px 19px;
     cursor: pointer;
+    margin-right: 40px;
+    margin-bottom: 1px;
 }
-.perfil ul {
-    position: absolute;
-    display: none;
-}
-.perfil:hover ul{
-    display: block;
-}
-.perfil:hover ul li{
-    display: block;
-    background-color: rgb(68, 68, 68);
-    list-style: none;
-    text-decoration: none;
-    padding: 19px 8px;
-}
-.perfil:hover ul li:hover{
-    background-color: rgb(44, 44, 44);
-}
+
 .imgperfil {
     height: 30px;
     border-radius: 20px;
@@ -69,4 +59,47 @@ a {
     padding: 8px;
     text-transform: capitalize;
     margin-left: 5px;
+}
+.drop {
+    position: relative;
+    display: inline-block;
+}
+.dropContent {
+    display: none;
+    position: absolute;
+    list-style: none;
+}
+.drop:hover .dropContent {
+    display: block;
+    margin-top: 12px;
+}
+.drop:hover .dropContent li {
+    background-color: rgb(68, 68, 68);
+    padding: 19px 8px;
+}
+.drop:hover .dropContent li:hover {
+    background-color: rgb(34, 34, 34);
+}
+
+.gamelist {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px;
+    grid-template-rows: 100px 150px;
+    justify-content: center;
+    column-gap: 20px;
+}
+.descricao {
+    background-color: #fff;
+    padding: 10px 7px;   
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+}
+.imgjogo {
+    width: 150px;
+    height: 100px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
 }

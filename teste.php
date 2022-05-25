@@ -30,14 +30,16 @@
                     $pesq = $mysqli->query($sql);
                     $nick = $pesq->fetch_assoc();
                 ?>
+                <div class="drop">
                 <li class="perfil">   
                     <img class="imgperfil" src="./img/imgperfil.png" alt="">
                     <?php echo "<p class='nick'>".$nick['nick']."</p>" ?>
-                    <ul>
+                    <ul class="dropContent">
                         <li><a href="meuperfil.php">Perfil</a></li>
                         <li><a href="sair.php">Sair</a></li>
                     </ul>
                 </li>
+                </div>
                 <?php
                     endif
                 ?>
@@ -48,9 +50,18 @@
     </header>
     
     <main>
-        <div>ultimo jogo acessado</div>
+        
 
-        <div>jogos</div>
+        <div class="gamelist">
+            <div><img class="imgjogo"src="./img/jogoV.webp" alt=""></div>
+            <div><img class="imgjogo"src="./img/jogoM.png" alt=""></div>
+            <div><img class="imgjogo"src="./img/sudoku.png" alt=""></div>
+            <div><img class="imgjogo"src="./img/2048.webp" alt=""></div>
+            <div class="descricao"><b>Jogo da velha</b><p>Jogador vs computador</p></div>
+            <div class="descricao"><b>Jogo da memoria</b></div>
+            <div class="descricao"><b>Sudoku</b></div>
+            <div class="descricao"><b>2048</b></div>
+        </div>
     </main>
 </body>
 </html>
