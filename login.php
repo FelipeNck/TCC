@@ -13,7 +13,7 @@
 </head>
 <body class="principal">
     <form id="conteudo" action="validarlogin.php" method="post">
-        <a href="index.php"> Retornar à página principal</a>
+        <a class="anterior" href="index.php"><img class="voltar" src="./img/back.png" alt=""></a>
         <h1>Login</h1>
         <input type="email" maxlength="50" size="30" name="email" placeholder="Email" required>
         <input type="password" maxlength="25" size="30" name="senha" placeholder="Senha" required>
@@ -24,7 +24,7 @@
         ?>
         <div class="msg">
             <p>Email ou senha inválidos</p>
-            <p>Ainda não se cadastrou? Clique <a href="cadastro.php" style="color: white;">aqui</a></p>
+            <p>Ainda não se cadastrou?<a href="cadastro.php" style="color: blue;"> Clique aqui</a></p>
         </div>
         <?php
         endif;

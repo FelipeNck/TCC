@@ -1,7 +1,7 @@
 <?php
 
     $hostname = "localhost";
-    $bancodedados = "sitejogo";
+    $bancodedados = "tcc";
     $usuario = "root";
     $senha = "";
 

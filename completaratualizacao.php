@@ -2,13 +2,23 @@
 session_start();
 include("conexao.php");
 $id_email = $_SESSION['id_email'];
-$sql="select * from usuario where id_email= '$id_email'";
+$sql="select * from usuarios where id_email= '$id_email'";
 $pesq = $mysqli->query($sql);
 $dados = $pesq->fetch_assoc();
 $numc = $dados['num_cadastro'];
+
+$extensao = strtolower(strrchr($_FILES['foto']['name'], '.'));
+if (empty($extensao)){
+    $endereco = $dados['ft_perfil'];
+} else{
+    $endereco = md5(time()) . $extensao;
+
+    move_uploaded_file($_FILES['foto']['tmp_name'], "imgPerfil/".$endereco);
+}
+
 $nome = mysqli_real_escape_string($mysqli, trim($_POST['nome']));
 $nick = mysqli_real_escape_string($mysqli, trim($_POST['nick']));
-$email = mysqli_real_escape_string($mysqli, trim($_POST['email']));
+$emailnovo = mysqli_real_escape_string($mysqli, trim($_POST['email']));
 $senha = mysqli_real_escape_string($mysqli, trim($_POST['senha']));
 if(empty($nome)){
     $nome = $dados['nome'];
@@ -16,18 +26,18 @@ if(empty($nome)){
 if(empty($nick)){
     $nick = $dados['nick'];
 }
-if(empty($email)){
-    $email = $id_email;
+if(empty($emailnovo)){
+    $emailnovo = $id_email;
 }
 if(empty($senha)){
     $senha = $dados['senha'];
 }
-$sql = "update usuario set nome = '$nome', " . "nick = '$nick', " . "id_email = '$email', " . "senha = '$senha' " . "where num_cadastro = $numc";
+$sql = "update usuarios set ft_perfil = '$endereco', id_email = '$emailnovo', senha = '$senha', nome = '$nome', nick = '$nick' where id_email = '$id_email';";
 $mysqli->query($sql);
-if(isset($numc)){
+if(isset($id_email)){
     $_SESSION['atualizado'] = true;
 }
-$_SESSION['id_email'] = $email;
+$_SESSION['id_email'] = $emailnovo;
 $mysqli->close();
 header('Location: meuperfil.php');
 exit;

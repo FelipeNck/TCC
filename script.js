@@ -131,9 +131,7 @@ function encerrarJogo(vencedor = null) {
         setTimeout(() => window.location = "validarvitoria.php", 4500)
     }else if (vencedor == jogador_O){
         setTimeout(() => window.location = "validarderrota.php", 4500)
-    }else if (empate == 1){
-        setTimeout(() => window.location = "validarempate.php", 4500)
-    } else {
+    }else {
 	setTimeout(() => location.reload(), 4500)
     }
 }

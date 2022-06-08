@@ -7,7 +7,7 @@ $senha = mysqli_real_escape_string($mysqli, $_POST['senha']);
 
 // Aqui é verificado se existe esse email e senha no banco de dados
 // Se existir, retorna 1. Se não, retorna 0.
-$query = "select * from usuario where id_email = '$id_email' and senha = '$senha'";
+$query = "select * from usuarios where id_email = '$id_email' and senha = '$senha'";
 $result = mysqli_query($mysqli, $query);
 $row = mysqli_num_rows($result);
 if ($row == 1){
@@ -15,8 +15,8 @@ if ($row == 1){
     exit;
 }else{
     $_SESSION['incorreto'] = true;
+    header('Location: meuperfil.php');
 }
 $mysqli->close();
-header('Location: meuperfil.php');
 exit;
 ?>

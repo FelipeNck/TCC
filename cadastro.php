@@ -13,9 +13,8 @@ session_start();
 </head>
 <body class="principal">
     <form id="conteudo" action="validarcadastro.php" method="post">
-        <a href="index.php"> Retornar à página principal</a>
+        <a class="anterior" href="index.php"><img class="voltar" src="./img/back.png" alt=""></a>
         <h1>Cadastro</h1>
-        <p> Já fez cadastro? Faça login <a href="login.php" style="color: blue;">aqui</a></p>
         <input type="text" maxlength="50" size="30" name="nome" placeholder="Nome" required>
         <input type="text" maxlength="50" size="30" name="nick" placeholder="Nick" required>
         <input type="email" maxlength="50" size="30" name="email" placeholder="Email" required>
@@ -27,7 +26,8 @@ session_start();
         if(isset($_SESSION['usuario_existe'])):
         ?>
         <div class="msg">
-            <p>Usuário já cadastrado</p>
+            <p>Usuário já cadastrado!</p>
+            <p>Faça login <a href="login.php" style="color: blue;">aqui</a></p>
         </div>
         <?php
         endif;

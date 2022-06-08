@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2? family= Roboto:wght@300;400 & display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto:wght@300;400&display=swap');
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 body {
     background-color: #dcdde1;
@@ -26,11 +29,11 @@ header {
     color: #fff;
 }
 .menu {
-    border-radius: 5px;
+
     display: inline-block;
     list-style: none;
     text-decoration: none;
-    padding: 19px 8px;
+    padding: 19px 5px;
 }
 .menu:hover {
     background-color: rgb(44, 44, 44);
@@ -38,15 +41,35 @@ header {
 a {
     color: #fff;
     text-decoration: none;
-    padding: 19px 19px;
+}
+.inicio{
+    padding: 17px 15px;
 }
 .perfil {
+    display: inline-block;
     position: relative;
     list-style: none;
     padding: 11px 19px;
     cursor: pointer;
-    margin-right: 40px;
-    margin-bottom: 1px;
+}
+.perfil > .inicio {
+    padding: 11px 0px;
+    padding-right: 70px;
+}
+.perfil2{
+    display: inline-block;
+    position: relative;
+    bottom: 7px;
+    right: 15px;
+    list-style: none;
+    padding: 19px 5px;
+    cursor: pointer;
+}
+.perfil2 > .inicio {
+    padding: 11px 25px;
+}
+.perfil2:hover, .perfil:hover {
+    background-color: rgb(34, 34, 34);
 }
 
 .imgperfil {
@@ -60,46 +83,102 @@ a {
     text-transform: capitalize;
     margin-left: 5px;
 }
-.drop {
-    position: relative;
-    display: inline-block;
-}
-.dropContent {
-    display: none;
-    position: absolute;
-    list-style: none;
-}
-.drop:hover .dropContent {
-    display: block;
-    margin-top: 12px;
-}
-.drop:hover .dropContent li {
-    background-color: rgb(68, 68, 68);
-    padding: 19px 8px;
-}
-.drop:hover .dropContent li:hover {
-    background-color: rgb(34, 34, 34);
-}
 
-.gamelist {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: 150px 150px 150px 150px;
-    grid-template-rows: 100px 150px;
-    justify-content: center;
-    column-gap: 20px;
+.jogos {
+    text-align: center;
+    margin-top: 10px;
+    align-items: center;
 }
-.descricao {
-    background-color: #fff;
-    padding: 10px 7px;   
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    cursor: pointer;
+.conteiner {
+    height: 220px;
+    display: inline-block;
+    margin: 0 7px;
 }
-.imgjogo {
+.conteiner:hover {
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px black;
+}
+.imagem {
     width: 150px;
     height: 100px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    cursor: pointer;
+    display: block;
+}
+.desc {
+    width: 136px;
+    height: 100px;
+    background-color: #fff;
+    padding: 10px 7px;   
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.reset{
+    padding: 0;
+    color: black;
+}
+
+.anothercontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    margin-top: 40px;
+}
+.pont {
+    margin-left: 150px;
+}
+.pont > a > img {
+    width: 20px;
+    margin-right: 5px;
+}
+.pont > a > h1 {
+    color: black;
+    display: inline-block;
+}
+table {
+    border-collapse: collapse;
+    margin: 15px auto;
+}
+td {
+    padding: 10px;
+}
+.esp {
+    background-color: #130f40;
+    color: #fff;
+}
+.dados {
+    background-color: #D4D4D4;
+}
+.meusdados {
+    background-color: #60646D;
+}
+
+.jog {
+    margin-right: 150px;
+}
+.jog > img {
+    width: 20px;
+    margin-right: 5px;
+}
+.jog > h1 {
+    display: inline-block;
+}
+.jog > div > div {
+    display: grid;
+    grid-template-columns: 110px 120px;
+    text-align: left;
+    margin-left: 170px;
+}
+.empty > p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+}
+.jog > div > a > img, .jog > div > img  {
+    width: 120px;
+}
+.memory > div {
+    row-gap: 5px;
+}
+.memory > a > img {
+    margin: 15px 0px;
 }

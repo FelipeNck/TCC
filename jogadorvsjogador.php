@@ -1,15 +1,11 @@
 <?php
-    session_start();
-    include("conexao.php");
-    if(empty($_SESSION['valido'])){
-        $_SESSION['jgvelha'] = true;
-        header('Location: login.php');
-        exit;
-    } else {
-        $email = $_SESSION['id_email'];
-        $sql = "UPDATE usuarios SET ultimo_jogo = 'velha' WHERE id_email = '$email'";
-        $mysqli->query($sql);
-    }
+session_start();
+include("conexao.php");
+if (isset($_SESSION['valido'])){
+    $email = $_SESSION['id_email'];
+    $sql = "UPDATE usuarios SET ultimo_jogo = 'velha2' WHERE id_email = '$email'";
+    $mysqli->query($sql);
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylejv.css">
-    <title>JOGO DA VELHA (VS COMPUTADOR)</title>
+    <title>JOGO DA VELHA(2 JOGADORES)</title>
 </head>
 
 <body>
@@ -30,8 +26,7 @@
     </label>
     <nav>
         <ul>
-            <li><a href="lista.php"><img class="imgs" src="./img/ranking.png" alt=""> Ranking</a></li>
-            <li><a href="index.php"><img class="imgs" src="./img/retornar.png" alt=""> Página Principal</a></li>
+            <li><a href="index.php"><img class="imgs" src="./img/retornar.png" alt=""> Página principal</a></li>
         </ul>
     </nav>
     <div id="tela-preta"></div>
@@ -50,7 +45,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script2jog.js"></script>
 </body>
 
 </html>

@@ -69,7 +69,7 @@ function checaCarta(primeira, segunda){
         segunda.parentNode.classList.remove('virada');
         [primeiracarta, segundacarta] = [undefined, undefined];
     } else {
-        pontuacao += 100;
+        pontuacao += 25;
         [primeiracarta, segundacarta] = [undefined, undefined];
         checaVitoria()
     }
@@ -81,9 +81,9 @@ function checaVitoria() {
     if (viradas.length == imagens.length) {
         clearInterval(tempo);
 
-        let info = "Parabêns, Você conseguiu! <br> Tentativas: " + tentativas + "<br> Erros: " + erros + "<br> Pontuação: " + pontuacao + "<br>" + min + " : " + seg
+        let info = "Parabêns, Você conseguiu! <br> Tentativas: " + tentativas + "<br> Erros: " + erros + "<br> Pontuação: " + pontuacao + "<br>" + min + " : " + seg;
         document.getElementById("mensagem").innerHTML = info
-        setTimeout(() => location.reload(), 4500);
+        setTimeout('window.location = "validarmemoria.php?pontuacao="+pontuacao+"&min="+min+"&seg="+seg', 5000);
     }
 }
 
