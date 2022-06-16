@@ -26,7 +26,7 @@ if (isset($_SESSION['valido'])){
     </label>
     <nav>
         <ul>
-            <li><a href="index.php"><img class="imgs" src="./img/retornar.png" alt=""> Página principal</a></li>
+            <li><a href="index.php"><img class="imgs" src="./img/home.png" alt=""><p>Home</p></a></li>
         </ul>
     </nav>
     <div id="tela-preta"></div>

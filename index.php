@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="teste.css">
+    <link rel="stylesheet" href="principal.css">
     <title>Document</title>
 </head>
 <body>
@@ -157,7 +157,7 @@
                     $pesq = $mysqli->query($sql);
                     $data = $pesq->fetch_assoc(); 
                     ?>
-                    <a href="jogadorvscomputador.php"><img src="./img/jogoV2.png" alt=""></a>
+                    <a href="jogadorvscomputador.php"><img class="cj" src="./img/jogoV2.png" alt=""></a>
                     <div>
                         <div><b>Partidas:</b> <?php echo $data['partidas'] ?></div>
                         <div><b>Vitórias:</b> <?php echo $data['vitorias'] ?></div>
@@ -169,7 +169,7 @@
                         elseif ($jogo['ultimo_jogo'] == 'velha2'):
                 ?>
                 <div class="empty">
-                    <a href="jogadorvsjogador.php"><img src="./img/jogoV2.png" alt=""></a>
+                    <a href="jogadorvsjogador.php"><img class="cj" src="./img/jogoV2.png" alt=""></a>
                     <p>Jogador vs Jogador</p>
                 </div>
                 <?php
@@ -181,7 +181,7 @@
                     $pesq = $mysqli->query($sql);
                     $data = $pesq->fetch_assoc(); 
                     ?>
-                    <a href="memoria.php"><img src="./img/jogoM2.png" alt=""></a>
+                    <a href="memoria.php"><img class="cj" src="./img/jogoM2.png" alt=""></a>
                     <div>
                         <div><b>Partidas:</b> <?php echo $data['partidas'] ?></div>
                         <div><b>Pontuação:</b> <?php echo $data['pontuacao'] ?></div>
@@ -193,7 +193,7 @@
                         else:
                 ?>
                 <div class="empty">
-                    <img src="./img/22.png" alt="">
+                    <img class="cj" src="./img/22.png" alt="">
                     <p>Você ainda não jogou nada!</p>
                     <p>Comece a jogar agora</p>
                 </div>
@@ -202,7 +202,7 @@
                     elseif (empty($_SESSION['valido'])):
                 ?>
                 <div class="empty">
-                    <a href="login.php"><img src="./img/22.png" alt=""></a>
+                    <a href="login.php"><img class="cj" src="./img/22.png" alt=""></a>
                     <p>Você ainda não está logado!</p>
                     <p>Faça login para voltar a jogar</p>
                 </div>

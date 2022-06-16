@@ -28,8 +28,9 @@ if (empty($_SESSION['valido'])){
                     $perfil = $pesq->fetch_assoc();
                 ?>
                 <div class="drop">
-                <li class="perfil2"><a href="index.php">Home</a></li>
-                <li class="perfil2"><a href="sair.php">Sair</a></li>
+                    <li class="perfil2"><a href="index.php">Home</a></li>
+                    <li class="perfil2"><a href="sair.php">Sair</a></li>
+                    <li class="perfil2"><a class="inicio" href="lista.php">Ranking</a></li>
                 </div>
                 <?php
                     endif

@@ -29,11 +29,11 @@ header {
     color: #fff;
 }
 .menu {
-
     display: inline-block;
     list-style: none;
     text-decoration: none;
     padding: 19px 5px;
+    transition: 0.2s;
 }
 .menu:hover {
     background-color: rgb(44, 44, 44);
@@ -51,6 +51,7 @@ a {
     list-style: none;
     padding: 11px 19px;
     cursor: pointer;
+    transition: 0.2s;
 }
 .perfil > .inicio {
     padding: 11px 0px;
@@ -60,10 +61,11 @@ a {
     display: inline-block;
     position: relative;
     bottom: 7px;
-    right: 15px;
+    right: 5px;
     list-style: none;
-    padding: 19px 5px;
+    padding: 19px 0px;
     cursor: pointer;
+    transition: 0.2s;
 }
 .perfil2 > .inicio {
     padding: 11px 25px;
@@ -90,9 +92,9 @@ a {
     align-items: center;
 }
 .conteiner {
-    height: 220px;
     display: inline-block;
     margin: 0 7px;
+    transition: 0.3s;
 }
 .conteiner:hover {
     border-radius: 5px;
@@ -145,12 +147,15 @@ td {
 .esp {
     background-color: #130f40;
     color: #fff;
+    cursor: default;
 }
 .dados {
     background-color: #D4D4D4;
+    cursor: default;
 }
 .meusdados {
     background-color: #60646D;
+    cursor: default;
 }
 
 .jog {
@@ -162,23 +167,47 @@ td {
 }
 .jog > h1 {
     display: inline-block;
+    cursor: default;
 }
 .jog > div > div {
     display: grid;
     grid-template-columns: 110px 120px;
     text-align: left;
-    margin-left: 170px;
+    justify-content: center;
+    margin-left: 55px;
 }
 .empty > p {
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
 }
-.jog > div > a > img, .jog > div > img  {
+.cj  {
     width: 120px;
+    transform: translateX(0px) scale(1);
+    transition: 0.5s;
+}
+.cj:hover  {
+    transform: translateX(0px) scale(1.2);
+    margin: 5px 0px;
 }
 .memory > div {
     row-gap: 5px;
 }
 .memory > a > img {
     margin: 15px 0px;
+}
+
+@media screen and (max-width: 1200px){
+    .logo{
+        display: none;
+    }
+    .cabecalho{
+        margin: 0;
+    }
+    .info{
+        float: none;
+        text-align: center;
+    }
+    .pont{
+        margin-left: 100px;
+    }
 }

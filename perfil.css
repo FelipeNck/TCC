@@ -86,19 +86,14 @@ a {
 }
 
 h1 {
-    margin: 10px 0px;
+    margin: 6px 0px;
 }
 .conteiner {
     background-color: #dcdde1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
-    width: 600px;
-    height: 580px;
-    margin-top: 31px;
-    padding-bottom: 7px;
+    width: 40rem;
+    height: 37rem;
+    margin: 0 auto;
     border-left: solid black;
     border-right: solid black;
 }
@@ -154,4 +149,17 @@ h1 {
 .nickname {
     margin-top: 30px;
     font-weight: bold;
+}
+
+@media screen and (max-width: 1200px){
+    .logo{
+        display: none;
+    }
+    .cabecalho{
+        margin: 0;
+    }
+    .info{
+        float: none;
+        text-align: center;
+    }
 }

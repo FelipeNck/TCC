@@ -30,8 +30,9 @@
     </label>
     <nav>
         <ul>
-            <li><a href="lista.php"><img class="imgs" src="./img/ranking.png" alt=""> Ranking</a></li>
-            <li><a href="index.php"><img class="imgs" src="./img/retornar.png" alt=""> Página Principal</a></li>
+            <li><a href="index.php"><img class="imgs" src="./img/home.png" alt=""><p>Home</p></a></li>
+            <li><a href="lista.php"><img class="imgs" src="./img/ranking.png" alt=""><p>Ranking</p></a></li>
+            <li><a href="sair.php"><img class="imgs" src="./img/sair.png" alt=""><p>Sair</p></a></li>
         </ul>
     </nav>
     <div id="tela-preta"></div>
