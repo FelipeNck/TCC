@@ -18,18 +18,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylememoria.css">
     <title>Jogo da memória</title>
 </head>
 <body>
-    <script>
-        document.write(pontuacao);
-    </script>
-    <div id="mensagem"></div>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <img class="imgmenu" src="./img/menu.png" alt="">
+    </label>
+    <nav>
+        <ul>
+            <li><a href="index.php"><img class="imgs" src="./img/home.png" alt=""><p>Home</p></a></li>
+            <li><a href="lista.php"><img class="imgs" src="./img/ranking.png" alt=""><p>Ranking</p></a></li>
+            <li><a href="sair.php"><img class="imgs" src="./img/sair.png" alt=""><p>Sair</p></a></li>
+        </ul>
+    </nav>
+    
+    <h2>Jogo da memória</h2>
     <div id="baralho"></div>
+    <div id="mensagem"></div>
     <script src="memoria.js"></script>
 </body>
 </html>

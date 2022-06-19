@@ -21,11 +21,19 @@ function baralho() {
 
     let baralho = embaralhaCartas(imagens);
     for (let i = 0; i < imagens.length; i++) {
-        cartahtml += "<div class='carta'><img src='"+ baralho[i] +"' class='frente'><img src='./img/lixo.jpg' class='verso'></div>"
+        cartahtml += "<div class='carta virada'><img src='"+ baralho[i] +"' class='frente'><img src='./img/lixo.jpg' class='verso'></div>"
     }
     cartas.innerHTML = cartahtml;
+    setTimeout('comecaJogo()', 2000);
 }
 
+function comecaJogo() {
+    for (let i = 0; i < imagens.length; i++) {
+        let cart = document.querySelector(".carta.virada");
+        cart.classList.remove('virada');
+    }
+}
+ 
 function embaralhaCartas(imagens) {
     let j = 0
     for (let i = imagens.length-1; i>0; i--) {

@@ -70,6 +70,7 @@ nav {
   height: auto;
   left: -300px;
   position: absolute;
+  transition: 0.3s;
 }
 input[type="checkbox"]:checked ~ nav {
   transform: translateX(300px);

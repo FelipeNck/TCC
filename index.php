@@ -181,7 +181,7 @@
                     $pesq = $mysqli->query($sql);
                     $data = $pesq->fetch_assoc(); 
                     ?>
-                    <a href="memoria.php"><img class="cj" src="./img/jogoM2.png" alt=""></a>
+                    <a href="memoria.php"><img class="cjm" src="./img/jogoM2.png" alt=""></a>
                     <div>
                         <div><b>Partidas:</b> <?php echo $data['partidas'] ?></div>
                         <div><b>Pontuação:</b> <?php echo $data['pontuacao'] ?></div>

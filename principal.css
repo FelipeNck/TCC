@@ -180,7 +180,7 @@ td {
     font-family: 'Oswald', sans-serif;
     font-size: 20px;
 }
-.cj  {
+.cj, .cjm  {
     width: 120px;
     transform: translateX(0px) scale(1);
     transition: 0.5s;
@@ -188,6 +188,10 @@ td {
 .cj:hover  {
     transform: translateX(0px) scale(1.2);
     margin: 5px 0px;
+}
+.cjm:hover {
+    transform: translateX(0px) scale(1.2);
+    margin: 20px 0px;
 }
 .memory > div {
     row-gap: 5px;
