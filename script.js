@@ -20,6 +20,7 @@ document.addEventListener("click", (event) => {
     }
 
 })
+
 // ----------------------------------------------------------------
 // BOT
 
@@ -114,7 +115,7 @@ function encerrarJogo(vencedor = null) {
 
     if (vencedor) {
 	if (vencedor == jogador_X) {
-        	h2.innerHTML = `VOCÊ VENCEU!`
+        h2.innerHTML = `VOCÊ VENCEU!`
 	} else {
 		h2.innerHTML = `O COMPUTADOR VENCEU!`
 	}
@@ -125,6 +126,9 @@ function encerrarJogo(vencedor = null) {
 
     let contador = 3
     setInterval(() => {
+        if (contador <= 0){
+            contador = 0;
+        }
         h3.innerHTML = `reiniciando em... ${contador--}`;
     }, 1000)
     if (vencedor == jogador_X) {

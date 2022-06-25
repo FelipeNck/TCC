@@ -112,5 +112,3 @@ let tempo = setInterval(cronometro,1000);
 
 const a = document.querySelectorAll('.carta');
 a.forEach(a => a.addEventListener("click", vira));
-
-// colocar pontuação e tempo para ranking

@@ -11,6 +11,9 @@ h2 {
   margin-top: -8px;
   color: #fff;
 }
+h3 {
+  text-align: center;
+}
 #tela-preta {
   width: 100%;
   height: 100%;

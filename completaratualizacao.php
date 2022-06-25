@@ -32,6 +32,13 @@ if(empty($emailnovo)){
 if(empty($senha)){
     $senha = $dados['senha'];
 }
+
+$sql = "update jogo_velha set usuario = '$emailnovo' where usuario = '$id_email'";
+$mysqli->query($sql);
+
+$sql = "update jogo_memoria set usuario = '$emailnovo' where usuario = '$id_email'";
+$mysqli->query($sql);
+
 $sql = "update usuarios set ft_perfil = '$endereco', id_email = '$emailnovo', senha = '$senha', nome = '$nome', nick = '$nick' where id_email = '$id_email';";
 $mysqli->query($sql);
 if(isset($id_email)){
