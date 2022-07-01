@@ -71,7 +71,7 @@
                 </a>
             </div>
             <div class="conteiner">
-                <a class="reset" href="">
+                <a class="reset" href="sudoku.php">
                     <img class="imagem" src="./img/sudoku.png" alt="">
                     <p class="desc"><b>Sudoku</b><br>Complete todos os quadrados o mais rápido possível <span style="color: white;">aaa</span></p>
                 </a>

@@ -25,20 +25,62 @@ document.addEventListener("click", (event) => {
 // BOT
 
 function bot() {
-    const posicoesdisponiveis = []
-    for (index in celulas) {
-        if (!isNaN(index)) {
-            if (!celulas[index].classList.contains("X") && !celulas[index].classList.contains("O")) {
-                posicoesdisponiveis.push(index)
-            }
+    let jogada = -1
+    let comb = []
+    let cont = []
+    for (i=0;i<9;i++){
+        cont.push(document.getElementById(i).textContent)
+        if (cont.length == 3){
+            comb.push(cont)
+            cont = []
         }
-        
     }
-    const posicaoaleatoria = Math.floor(Math.random() * posicoesdisponiveis.length)
+    console.log(comb)
+    let id0 = 0
+    let id1 = 1
+    let id2 = 2
+    for (let l=0; l<3; l++){
+        if (comb[l][0] == "X" && comb[l][2] == "X" && comb[l][1] == ""){jogada = id1}
+        if (comb[l][0] == "X" && comb[l][1] == "X" && comb[l][2] == ""){jogada = id2}
+        if (comb[l][2] == "X" && comb[l][1] == "X" && comb[l][0] == ""){jogada = id0}
+        id0 += 3
+        id1 += 3
+        id2 += 3
+    }
+    id0 = 0
+    id1 = 3
+    id2 = 6
+    for (let c=0; c<3; c++){
+        if (comb[0][c] == "X" && comb[1][c] == "X" && comb[2][c] == ""){jogada = id2}
+        if (comb[0][c] == "X" && comb[2][c] == "X" && comb[1][c] == ""){jogada = id1}
+        if (comb[2][c] == "X" && comb[1][c] == "X" && comb[0][c] == ""){jogada = id0}
+        id0 += 1
+        id1 += 1
+        id2 += 1
+    }
+    if (comb[0][0] == "X" && comb[1][1] == "X" && comb[2][2] == ""){jogada = 8}
+    if (comb[0][0] == "X" && comb[1][1] == "" && comb[2][2] == "X"){jogada = 4}
+    if (comb[0][0] == "" && comb[1][1] == "X" && comb[2][2] == "X"){jogada = 0}
+    if (comb[2][0] == "X" && comb[1][1] == "X" && comb[0][2] == ""){jogada = 2}
+    if (comb[0][2] == "X" && comb[1][1] == "X" && comb[2][0] == ""){jogada = 6}
+    if (comb[0][2] == "X" && comb[1][1] == "" && comb[2][0] == "X"){jogada = 4}
+
+    if (jogada == -1){
+        let posicoesdisponiveis = []
+        for (index in celulas) {
+            if (!isNaN(index)) {
+                if (!celulas[index].classList.contains("X") && !celulas[index].classList.contains("O")) {
+                    posicoesdisponiveis.push(index)
+                }
+            }
+            
+        }
+        let posicaoaleatoria = Math.floor(Math.random() * posicoesdisponiveis.length)
+        jogada = posicoesdisponiveis[posicaoaleatoria]
+    }
     
     if (!fimdejogo){
-        jogar(posicoesdisponiveis[posicaoaleatoria], jogador_O)
-
+        jogar(jogada, jogador_O)
     }
 }
 

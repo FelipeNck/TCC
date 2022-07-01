@@ -17,6 +17,8 @@
             header('Location: jogadorvscomputador.php');
         }elseif ($_SESSION['jgmemoria']){
             header('Location: memoria.php');
+        }elseif ($_SESSION['sudoku']){
+            header('Location: sudoku.php');
         }else{
             header('Location: index.php');
         };
