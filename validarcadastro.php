@@ -21,7 +21,10 @@ if ($row['total'] == 1){
 $sql = "INSERT INTO jogo_velha (usuario) VALUES ('$email')";
 $mysqli->query($sql);
 
-$sql = "INSERT INTO jogo_memoria (usuario) VALUES ('$email')";
+$sql = "INSERT INTO jogo_memoria (usuario, minutos) VALUES ('$email', 100000)";
+$mysqli->query($sql);
+
+$sql = "INSERT INTO sudoku (usuario, minutos) VALUES ('$email', 100000)";
 $mysqli->query($sql);
 
 $sql = "INSERT INTO usuarios (ft_perfil, nome, nick, id_email, senha) VALUES ('imgperfil.png', '$nome', '$nick', '$email', '$senha')";

@@ -8,7 +8,7 @@
         exit;
     } else {
         $email = $_SESSION['id_email'];
-        $sql = "UPDATE usuarios SET ultimo_jogo = 'velha2' WHERE id_email = '$email'";
+        $sql = "UPDATE usuarios SET ultimo_jogo = 'sudoku' WHERE id_email = '$email'";
         $mysqli->query($sql);
     }
 ?>

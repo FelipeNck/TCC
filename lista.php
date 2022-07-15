@@ -374,7 +374,7 @@ $con = $mysqli->query($sql);
 
                 <section class="tempo">
                     <?php
-                    $sql = "SELECT usuario, concat(minutos, ' : ', segundos) as 'tempo' FROM jogo_memoria ORDER BY minutos, segundos";
+                    $sql = "SELECT usuario, concat(minutos, ' : ', segundos) as 'tempo', partidas FROM jogo_memoria ORDER BY minutos, segundos";
                     $con = $mysqli->query($sql);
                     ?>
                     <table>
@@ -389,7 +389,7 @@ $con = $mysqli->query($sql);
                         if (isset($_SESSION['valido'])):
                             $email = $_SESSION['id_email'];
                             while ($dados = $con->fetch_array()){
-                                if ($dados['tempo'] != "0 : 0"):
+                                if ($dados['partidas'] != 0):
                                     if ($email != $dados['usuario']):
                         ?>
 
@@ -425,6 +425,14 @@ $con = $mysqli->query($sql);
 
                         <?php
                                     endif;
+                                else:
+                        ?>
+                        <tr class="empty">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <?php
                                 endif;
                             }
                         endif
@@ -491,6 +499,204 @@ $con = $mysqli->query($sql);
                 </section>
             </section>
             <!-- FIM JOGO DA MEMORIA -->
+
+            <?php 
+                elseif ($jogo['ultimo_jogo'] == "sudoku"):
+            ?>
+
+            <!-- SUDOKU -->
+            <section class="jogos">
+                <h1>Sudoku</h1>
+
+                <section class="pont">
+                    <?php
+                    $sql = "SELECT usuario, pontuacao FROM sudoku ORDER BY pontuacao DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <thead>
+                            <tr class="esp">
+                                <td>Classificação</td>
+                                <td>Nick</td>
+                                <td>Pontuação</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            if (isset($_SESSION['valido'])):
+                                $email = $_SESSION['id_email'];
+                                while ($dados = $con->fetch_array()){
+                                    if ($email != $dados['usuario']):
+                            ?>
+
+                            <tr class="dados">
+                                <td><?php echo $i."º lugar" ?></td>
+                                <?php $i++ ?>
+                                <td>
+                                    <?php 
+                                    $usuario = $dados["usuario"];
+                                    $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                    $pesq = $mysqli->query($sql);
+                                    $nick = $pesq->fetch_assoc();
+                                    echo $nick["nick"]
+                                    ?>
+                                </td>
+                                <td><?php echo $dados["pontuacao"] ?></td>
+                            </tr>
+                            <?php   else: ?>
+                            <tr class="meusdados">
+                                <td><?php echo $i."º lugar" ?></td>
+                                <?php $i++ ?>
+                                <td>
+                                    <?php 
+                                    $usuario = $dados["usuario"];
+                                    $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                    $pesq = $mysqli->query($sql);
+                                    $nick = $pesq->fetch_assoc();
+                                    echo $nick["nick"] 
+                                    ?>
+                                </td>
+                                <td><?php echo $dados["pontuacao"] ?></td>
+                            </tr>
+
+                            <?php
+                                    endif;
+                                }
+                            endif
+                            ?>
+                        </tbody>    
+                    </table>
+                </section>
+
+                <section class="tempo">
+                    <?php
+                    $sql = "SELECT usuario, concat(minutos, ' : ', segundos) as 'tempo', partidas FROM sudoku ORDER BY minutos, segundos";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Tempo</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        if (isset($_SESSION['valido'])):
+                            $email = $_SESSION['id_email'];
+                            while ($dados = $con->fetch_array()){
+                                if ($dados['partidas'] != 0):
+                                    if ($email != $dados['usuario']):
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["tempo"] ?></td>
+                        </tr>
+                        <?php       else: ?>
+                        <tr class="meusdados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"] 
+                                ?>
+                            </td>
+                            <td><?php echo $dados["tempo"] ?></td>
+                        </tr>
+
+                        <?php
+                                    endif;
+                                else:
+                        ?>
+                        <tr class="empty">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <?php
+                                endif;
+                            }
+                        endif
+                        ?>
+                    </table>
+                </section>
+
+                <section class="part">
+                    <?php
+                    $sql = "SELECT usuario, partidas FROM sudoku ORDER BY partidas DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Partidas</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        if (isset($_SESSION['valido'])):
+                            $email = $_SESSION['id_email'];
+                            while ($dados = $con->fetch_array()){
+                                if ($email != $dados['usuario']):
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["partidas"] ?></td>
+                        </tr>
+                        <?php   else: ?>
+                        <tr class="meusdados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"] 
+                                ?>
+                            </td>
+                            <td><?php echo $dados["partidas"] ?></td>
+                        </tr>
+
+                        <?php
+                                endif;
+                            }
+                        endif
+                        ?>
+                    </table>
+                </section>
+            </section>
+            <!-- FIM SUDOKU -->
 
             <?php
                 endif;

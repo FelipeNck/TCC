@@ -190,6 +190,23 @@
                     </div>
                 </div>
                 <?php
+                        elseif ($jogo['ultimo_jogo'] == 'sudoku'):
+                ?>
+                <div class="memory">
+                    <?php
+                    $sql = "SELECT pontuacao, minutos, segundos, partidas FROM sudoku WHERE usuario = '$id_email'";
+                    $pesq = $mysqli->query($sql);
+                    $data = $pesq->fetch_assoc(); 
+                    ?>
+                    <a href="sudoku.php"><img class="cjm" src="./img/sudoku2.png" alt=""></a>
+                    <div>
+                        <div><b>Partidas:</b> <?php echo $data['partidas'] ?></div>
+                        <div><b>Pontuação:</b> <?php echo $data['pontuacao'] ?></div>
+                        <div><b>Menor tempo:</b></div>
+                        <div><?php echo $data['minutos']." : ".$data['segundos'] ?></div>
+                    </div>
+                </div>
+                <?php
                         else:
                 ?>
                 <div class="empty">

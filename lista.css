@@ -138,6 +138,7 @@ td {
 .pont, .vit, .part, .tempo {
     display: inline-block;
 }
-.tempo {
-    margin-bottom: 75px;
+.empty {
+    background-color: #dcdde1;
+    height: 38px;
 }
