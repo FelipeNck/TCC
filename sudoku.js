@@ -54,15 +54,17 @@ function setgame () {
 }
 
 function Eduardo(){
-    const c = document.querySelectorAll('.number.numberselect');
-    if (c.length >= 1){
-       let d = c[0];
-       d.classList.remove('numberselect');
-   }
-   this.classList.add("numberselect");
+    if (this.classList[1] != 'concluido'){
+        const c = document.querySelectorAll('.number.numberselect');
+        if (c.length >= 1){
+            let d = c[0];
+            d.classList.remove('numberselect');
+        }
+        this.classList.add("numberselect");
 
-   const colocanumero = document.querySelectorAll('.title');
-   colocanumero.forEach(colocanumero => colocanumero.addEventListener("click", colocanum));
+        const colocanumero = document.querySelectorAll('.title');
+        colocanumero.forEach(colocanumero => colocanumero.addEventListener("click", colocanum));
+    }
 }
  
 function colocanum(){
@@ -127,20 +129,15 @@ function checajogo() {
     let veri = document.querySelectorAll('.concluido');
     if (veri.length == 9){
         clearInterval(tempo);
-        console.log(min+" : "+seg)
+        console.log(seg)
+        setTimeout('window.location = "validarsudoku.php?erros="+errors+"&seg="+seg', 5000);
     }
 }
 
-let seg = 0, min = 0;
+let seg = 0;
 
 function cronometro() {
-    if (seg < 60) {
-        console.log(min+' : '+seg);
-        seg++
-    } else {
-        min++
-        seg = 0;
-    }
+    seg++
 }
 
 let tempo = setInterval(cronometro,1000);

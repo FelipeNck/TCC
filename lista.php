@@ -1,21 +1,16 @@
 <?php
 session_start();
 include("conexao.php");
-if(empty($_SESSION['lista'])){
-    $_SESSION['lista'] = 'ponto';
+
+if (isset($_SESSION['valido'])){
+    $email = $_SESSION['id_email'];
+    $sql = "SELECT ultimo_jogo FROM usuarios WHERE id_email = '$email'";
+    $pesq = $mysqli->query($sql);
+    $jogo = $pesq->fetch_assoc();
 }
-if($_SESSION['lista'] == 'ponto'){
-    $sql = "SELECT nick, pontuação FROM usuario ORDER BY pontuação DESC";
-    $con = $mysqli->query($sql);
-}
-else if($_SESSION['lista'] == 'vitoria'){
-    $sql = "SELECT nick, vitórias FROM usuario ORDER BY vitórias DESC";
-    $con = $mysqli->query($sql);
-}
-else if($_SESSION['lista'] == 'num'){
-    $sql = "SELECT nick, num_partidas FROM usuario ORDER BY num_partidas DESC";
-    $con = $mysqli->query($sql);
-}
+
+$sql = "SELECT id_email, nick, pontuacao FROM usuarios ORDER BY pontuacao DESC";
+$con = $mysqli->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -24,103 +19,608 @@ else if($_SESSION['lista'] == 'num'){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylelista.css">
+    <link rel="stylesheet" href="lista.css">
     <title>Ranking</title>
 </head>
 <body>
-    <input type="checkbox" id="check">
-    <label for="check">
-        <img class="imgmenu" src="./img/menu.png" alt="">
-    </label>
-    <nav>
-        <ul>
-            <li><a href="jogadorvscomputador.php"><img class="imgs" src="./img/jogo.png" alt=""> Jogo</a></li>
-            <li><a href="index.php"><img class="imgs" src="./img/retornar.png" alt=""> Página principal</a></li>
-        </ul>
-    </nav>
-    <form align="center" action="metodolistagem.php" method="post">
-        <p>
-            Método de classificação:
-            <select name="listagem" required>
-                <option value=""> </option>
-                <option value="ponto"> Pontuação </option>
-                <option value="vitoria"> Número de vitórias </option>
-                <option value="num"> Número de partidas jogadas </option>
-            </select>
-        </p>
-        <input type="submit" name="Confirmar" value="Confirmar">
-    </form>
-    <?php
-        if($_SESSION['lista'] == 'ponto'):
-    ?>
-    <div class="conteiner">
-        <table>
-            <tr>
-                <td>Classificação</td>
-                <td>Nick</td>
-                <td>Pontuação</td>
-            </tr>
-            <?php $i = 1 ?>
-            <?php while($dados = $con->fetch_array()){ ?>
-            <tr>
-                <td><?php echo $i."º lugar" ?></td>
-                <?php $i++ ?>
-                <td><?php echo $dados["nick"] ?></td>
-                <td><?php echo $dados["pontuação"] ?></td>
-            </tr>
-            <?php } ?>
-        </table>
-    </div>
-    <?php
-        endif;
-    ?>
-    <?php
-        if($_SESSION['lista'] == 'vitoria'):
-    ?>
-    <div class="conteiner">
-        <table>
-            <tr>
-                <td>Classificação</td>
-                <td>Nick</td>
-                <td>Vitórias</td>
-            </tr>
-            <?php $i = 1 ?>
-            <?php while($dados = $con->fetch_array()){ ?>
-            <tr>
-                <td><?php echo $i."º lugar" ?></td>
-                <?php $i++ ?>
-                <td><?php echo $dados["nick"] ?></td>
-                <td><?php echo $dados["vitórias"] ?></td>
-            </tr>
-            <?php } ?>
-        </table>
-    </div>
-    <?php
-        endif;
-    ?>
-    <?php
-        if($_SESSION['lista'] == 'num'):
-    ?>
-    <div class="conteiner">
-        <table>
-            <tr>
-                <td>Classificação</td>
-                <td>Nick</td>
-                <td>Número de partidas jogadas</td>
-            </tr>
-            <?php $i = 1 ?>
-            <?php while($dados = $con->fetch_array()){ ?>
-            <tr>
-                <td><?php echo $i."º lugar" ?></td>
-                <?php $i++ ?>
-                <td><?php echo $dados["nick"] ?></td>
-                <td><?php echo $dados["num_partidas"] ?></td>
-            </tr>
-            <?php } ?>
-        </table>
-    </div>
-    <?php
-        endif;
-    ?>
+    <header>
+        <div class="cabecalho">
+            <ul class="info">
+                <?php
+                    if(empty($_SESSION['valido'])):
+                ?>
+                <li class="menu"><a class="inicio" href="login.php">Logar</a></li>
+                <li class="menu"><a class="inicio" href="cadastro.php">Cadastrar</a></li>
+                <?php
+                    endif
+                ?>
+                <?php
+                    if(isset($_SESSION['valido'])):
+                    $id_email = $_SESSION['id_email'];
+                    $sql="select nick, ft_perfil from usuarios where id_email= '$id_email'";
+                    $pesq = $mysqli->query($sql);
+                    $perfil = $pesq->fetch_assoc();
+                ?>
+                <li class="perfil">
+                    <a class="inicio" href="meuperfil.php">
+                        <?php echo "<img class='imgperfil' src=./imgPerfil/".$perfil['ft_perfil'].">" ?>
+                        <?php echo "<p class='nick'>".$perfil['nick']."</p>" ?>
+                    </a>
+                </li>
+                <li class="perfil2"><a class="inicio" href="sair.php">Sair</a></li>
+                <li class="perfil2"><a class="inicio" href="index.php">Home</a></li>
+                <?php
+                    endif
+                ?>
+            </ul>
+
+            <img class="logo" src="./img/logo2.png" alt=""> 
+        </div>
+    </header>
+
+    <main>
+        <div class="rank">
+            <!-- PONTUAÇÂO GERAL -->
+            <section class="pontgeral">
+                <div>
+                    <img src="./img/trofeu.png" alt="">
+                    <h1>Ranking geral</h1>
+                </div>
+                <table>
+                    <tr class="esp">
+                        <td>Classificação</td>
+                        <td>Nick</td>
+                        <td>Pontuação</td>
+                    </tr>
+
+                    <?php
+                    $i = 1;
+                    if (isset($_SESSION['valido'])):
+                    $email = $_SESSION['id_email'];
+                    while($dados = $con->fetch_array()){ 
+                        if ($email != $dados['id_email']):
+                    ?>
+
+                    <tr class="dados">
+                        <td><?php echo $i."º lugar" ?></td>
+                        <?php $i++ ?>
+                        <td><?php echo $dados["nick"] ?></td>
+                        <td><?php echo $dados["pontuacao"] ?></td>
+                    </tr>
+                    <?php else: ?>
+                    <tr class="meusdados">
+                        <td><?php echo $i."º lugar" ?></td>
+                        <?php $i++ ?>
+                        <td><?php echo $dados["nick"] ?></td>
+                        <td><?php echo $dados["pontuacao"] ?></td>
+                    </tr>
+                    <?php
+                        endif;
+                    }
+                    else:
+                        while($dados = $con->fetch_array()){
+                    ?>
+                    <tr class="dados">
+                        <td><?php echo $i."º lugar" ?></td>
+                        <?php $i++ ?>
+                        <td><?php echo $dados["nick"] ?></td>
+                        <td><?php echo $dados["pontuacao"] ?></td>
+                    </tr>
+                    <?php
+                    } 
+                    endif 
+                    ?>
+                </table>
+                <!-- FIM PONTUAÇÂO GERAL -->
+            </section>
+
+            <?php
+            if (isset($jogo)):
+                if ($jogo['ultimo_jogo'] == "velha"):
+            ?>
+            <!-- JOGO DA VELHA -->
+            <section class="jogos">
+                <h1>Jogo da velha</h1>
+
+                <section class="pont">
+                    <?php
+                    $sql = "SELECT usuario, pontuacao FROM jogo_velha ORDER BY pontuacao DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <thead>
+                            <tr class="esp">
+                                <td>Classificação</td>
+                                <td>Nick</td>
+                                <td>Pontuação</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            if (isset($_SESSION['valido'])):
+                                $email = $_SESSION['id_email'];
+                                while ($dados = $con->fetch_array()){
+                                    if ($email != $dados['usuario']):
+                            ?>
+
+                            <tr class="dados">
+                                <td><?php echo $i."º lugar" ?></td>
+                                <?php $i++ ?>
+                                <td>
+                                    <?php 
+                                    $usuario = $dados["usuario"];
+                                    $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                    $pesq = $mysqli->query($sql);
+                                    $nick = $pesq->fetch_assoc();
+                                    echo $nick["nick"]
+                                    ?>
+                                </td>
+                                <td><?php echo $dados["pontuacao"] ?></td>
+                            </tr>
+                            <?php   else: ?>
+                            <tr class="meusdados">
+                                <td><?php echo $i."º lugar" ?></td>
+                                <?php $i++ ?>
+                                <td>
+                                    <?php 
+                                    $usuario = $dados["usuario"];
+                                    $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                    $pesq = $mysqli->query($sql);
+                                    $nick = $pesq->fetch_assoc();
+                                    echo $nick["nick"] 
+                                    ?>
+                                </td>
+                                <td><?php echo $dados["pontuacao"] ?></td>
+                            </tr>
+
+                            <?php
+                                    endif;
+                                }
+                            endif
+                            ?>
+                        </tbody>    
+                    </table>
+                </section>
+
+                <section class="vit">
+                    <?php
+                    $sql = "SELECT usuario, vitorias FROM jogo_velha ORDER BY vitorias DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Vitórias</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        if (isset($_SESSION['valido'])):
+                            $email = $_SESSION['id_email'];
+                            while ($dados = $con->fetch_array()){
+                                if ($email != $dados['usuario']):
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["vitorias"] ?></td>
+                        </tr>
+                        <?php   else: ?>
+                        <tr class="meusdados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"] 
+                                ?>
+                            </td>
+                            <td><?php echo $dados["vitorias"] ?></td>
+                        </tr>
+
+                        <?php
+                                endif;
+                            }
+                        endif
+                        ?>
+                    </table>
+                </section>
+
+                <section class="part">
+                    <?php
+                    $sql = "SELECT usuario, partidas FROM jogo_velha ORDER BY partidas DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Partidas</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        if (isset($_SESSION['valido'])):
+                            $email = $_SESSION['id_email'];
+                            while ($dados = $con->fetch_array()){
+                                if ($email != $dados['usuario']):
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["partidas"] ?></td>
+                        </tr>
+                        <?php   else: ?>
+                        <tr class="meusdados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"] 
+                                ?>
+                            </td>
+                            <td><?php echo $dados["partidas"] ?></td>
+                        </tr>
+
+                        <?php
+                                endif;
+                            }
+                        endif
+                        ?>
+                    </table>
+                </section>
+            </section>
+            <!-- FIM JOGO DA VELHA -->
+            
+            <?php 
+                elseif ($jogo['ultimo_jogo'] == "memoria"):
+            ?>
+
+            <!-- JOGO DA MEMORIA -->
+            <section class="jogos">
+                <h1>Jogo da velha</h1>
+
+                <section class="pont">
+                    <?php
+                    $sql = "SELECT usuario, pontuacao FROM jogo_memoria ORDER BY pontuacao DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <thead>
+                            <tr class="esp">
+                                <td>Classificação</td>
+                                <td>Nick</td>
+                                <td>Pontuação</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            if (isset($_SESSION['valido'])):
+                                $email = $_SESSION['id_email'];
+                                while ($dados = $con->fetch_array()){
+                                    if ($email != $dados['usuario']):
+                            ?>
+
+                            <tr class="dados">
+                                <td><?php echo $i."º lugar" ?></td>
+                                <?php $i++ ?>
+                                <td>
+                                    <?php 
+                                    $usuario = $dados["usuario"];
+                                    $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                    $pesq = $mysqli->query($sql);
+                                    $nick = $pesq->fetch_assoc();
+                                    echo $nick["nick"]
+                                    ?>
+                                </td>
+                                <td><?php echo $dados["pontuacao"] ?></td>
+                            </tr>
+                            <?php   else: ?>
+                            <tr class="meusdados">
+                                <td><?php echo $i."º lugar" ?></td>
+                                <?php $i++ ?>
+                                <td>
+                                    <?php 
+                                    $usuario = $dados["usuario"];
+                                    $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                    $pesq = $mysqli->query($sql);
+                                    $nick = $pesq->fetch_assoc();
+                                    echo $nick["nick"] 
+                                    ?>
+                                </td>
+                                <td><?php echo $dados["pontuacao"] ?></td>
+                            </tr>
+
+                            <?php
+                                    endif;
+                                }
+                            endif
+                            ?>
+                        </tbody>    
+                    </table>
+                </section>
+
+                <section class="tempo">
+                    <?php
+                    $sql = "SELECT usuario, concat(minutos, ' : ', segundos) as 'tempo' FROM jogo_memoria ORDER BY minutos, segundos";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Tempo</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        if (isset($_SESSION['valido'])):
+                            $email = $_SESSION['id_email'];
+                            while ($dados = $con->fetch_array()){
+                                if ($dados['tempo'] != "0 : 0"):
+                                    if ($email != $dados['usuario']):
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["tempo"] ?></td>
+                        </tr>
+                        <?php       else: ?>
+                        <tr class="meusdados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"] 
+                                ?>
+                            </td>
+                            <td><?php echo $dados["tempo"] ?></td>
+                        </tr>
+
+                        <?php
+                                    endif;
+                                endif;
+                            }
+                        endif
+                        ?>
+                    </table>
+                </section>
+
+                <section class="part">
+                    <?php
+                    $sql = "SELECT usuario, partidas FROM jogo_memoria ORDER BY partidas DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Partidas</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        if (isset($_SESSION['valido'])):
+                            $email = $_SESSION['id_email'];
+                            while ($dados = $con->fetch_array()){
+                                if ($email != $dados['usuario']):
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["partidas"] ?></td>
+                        </tr>
+                        <?php   else: ?>
+                        <tr class="meusdados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"] 
+                                ?>
+                            </td>
+                            <td><?php echo $dados["partidas"] ?></td>
+                        </tr>
+
+                        <?php
+                                endif;
+                            }
+                        endif
+                        ?>
+                    </table>
+                </section>
+            </section>
+            <!-- FIM JOGO DA MEMORIA -->
+
+            <?php
+                endif;
+            else:
+            ?>
+
+            <!-- JOGO DA VELHA (SE USUÁRIO NÂO TIVER JOGADO NADA) -->
+            <section class="jogos">
+                <h1>Jogo da velha</h1>
+
+                <section class="pont">
+                    <?php
+                    $sql = "SELECT usuario, pontuacao FROM jogo_velha ORDER BY pontuacao DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Pontuação</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        while ($dados = $con->fetch_array()){
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["pontuacao"] ?></td>
+                        </tr>
+
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </section>
+
+                <section class="vit">
+                    <?php
+                    $sql = "SELECT usuario, vitorias FROM jogo_velha ORDER BY vitorias DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Vitórias</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        while ($dados = $con->fetch_array()){
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["vitorias"] ?></td>
+                        </tr>
+
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </section>
+
+                <section class="part">
+                    <?php
+                    $sql = "SELECT usuario, partidas FROM jogo_velha ORDER BY partidas DESC";
+                    $con = $mysqli->query($sql);
+                    ?>
+                    <table>
+                        <tr class="esp">
+                            <td>Classificação</td>
+                            <td>Nick</td>
+                            <td>Vitórias</td>
+                        </tr>
+
+                        <?php
+                        $i = 1;
+                        while ($dados = $con->fetch_array()){
+                        ?>
+
+                        <tr class="dados">
+                            <td><?php echo $i."º lugar" ?></td>
+                            <?php $i++ ?>
+                            <td>
+                                <?php 
+                                $usuario = $dados["usuario"];
+                                $sql = "SELECT nick FROM usuarios WHERE id_email = '$usuario'";
+                                $pesq = $mysqli->query($sql);
+                                $nick = $pesq->fetch_assoc();
+                                echo $nick["nick"]
+                                ?>
+                            </td>
+                            <td><?php echo $dados["partidas"] ?></td>
+                        </tr>
+
+                        <?php
+                        }
+                        ?>
+                    </table>
+                </section>
+            </section>
+            <!--  FIM JOGO DA VELHA (SE USUÁRIO NÂO TIVER JOGADO NADA) -->
+
+            <?php
+            endif
+            ?>
+        </div>
+    </main>
 </body>
 </html>

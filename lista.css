@@ -129,12 +129,15 @@ td {
     cursor: default;
 }
 
-.velha {
+.jogos {
     text-align: center;
 }
-.velha > h1 {
+.jogos > h1 {
     margin: 15px 20px 0px;
 }
-.pont, .vit, .part {
+.pont, .vit, .part, .tempo {
     display: inline-block;
+}
+.tempo {
+    margin-bottom: 75px;
 }

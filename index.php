@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="perfil2"><a class="inicio" href="sair.php">Sair</a></li>
-                <li class="perfil2"><a class="inicio" href="lista2.php">Ranking</a></li>
+                <li class="perfil2"><a class="inicio" href="lista.php">Ranking</a></li>
                 <?php
                     endif
                 ?>
@@ -86,7 +86,7 @@
         
         <section class="anothercontainer">
             <div class="pont">
-                <a href="lista2.php">
+                <a href="lista.php">
                     <img src="./img/trofeu.png" alt="">
                     <h1>Ranking</h1>
                 </a>
