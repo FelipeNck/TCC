@@ -11,7 +11,7 @@ $senha = mysqli_real_escape_string($mysqli, trim($_POST['senha']));
 $sql = "select count(*) as total from usuarios where id_email = '$email'";
 $result = mysqli_query($mysqli, $sql);
 $row = mysqli_fetch_assoc($result);
-if ($row['total'] == 1){
+if ($row['total'] >= 1){
     $_SESSION['usuario_existe'] = true;
     header('Location: cadastro.php');
     exit;

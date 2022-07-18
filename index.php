@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="principal.css">
-    <title>Document</title>
+    <title>JDC</title>
 </head>
 <body>
     <header>
@@ -77,7 +77,7 @@
                 </a>
             </div>
             <div class="conteiner">
-                <a class="reset" href="">
+                <a class="reset" href="2048.php">
                     <img class="imagem" src="./img/2048.webp" alt="">
                     <p class="desc"><b>2048</b><br>Combine os números até chegar no 2048 <span style="color: white;">aaa</span></p>
                 </a>
@@ -199,6 +199,23 @@
                     $data = $pesq->fetch_assoc(); 
                     ?>
                     <a href="sudoku.php"><img class="cjm" src="./img/sudoku2.png" alt=""></a>
+                    <div>
+                        <div><b>Partidas:</b> <?php echo $data['partidas'] ?></div>
+                        <div><b>Pontuação:</b> <?php echo $data['pontuacao'] ?></div>
+                        <div><b>Menor tempo:</b></div>
+                        <div><?php echo $data['minutos']." : ".$data['segundos'] ?></div>
+                    </div>
+                </div>
+                <?php
+                        elseif ($jogo['ultimo_jogo'] == '2048'):
+                ?>
+                <div class="memory">
+                    <?php
+                    $sql = "SELECT pontuacao, minutos, segundos, partidas FROM mmxlviii WHERE usuario = '$id_email'";
+                    $pesq = $mysqli->query($sql);
+                    $data = $pesq->fetch_assoc(); 
+                    ?>
+                    <a href="2048.php"><img class="cjm" src="./img/sudoku2.png" alt=""></a>
                     <div>
                         <div><b>Partidas:</b> <?php echo $data['partidas'] ?></div>
                         <div><b>Pontuação:</b> <?php echo $data['pontuacao'] ?></div>

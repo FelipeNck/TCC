@@ -17,6 +17,14 @@ elseif ($temp <= 300){$pontuacao += 10;}
 $sql = "UPDATE usuarios SET pontuacao = pontuacao + '$pontuacao'  WHERE id_email = '$email'";
 $mysqli->query($sql);
 
+$sql = "select count(*) as total from sudoku where usuario = '$email'";
+$result = mysqli_query($mysqli, $sql);
+$row = mysqli_fetch_assoc($result);
+if ($row['total'] == 0){
+    $sql = "INSERT INTO sudoku (usuario) VALUES ('$email')";
+    $mysqli->query($sql);
+}
+
 $sql = "SELECT minutos, segundos, partidas FROM sudoku WhERE usuario = '$email'";
 $pesq = $mysqli->query($sql);
 $dados = $pesq->fetch_assoc();

@@ -142,3 +142,16 @@ td {
     background-color: #dcdde1;
     height: 38px;
 }
+
+@media screen and (max-width: 1200px){
+    .logo{
+        display: none;
+    }
+    .cabecalho{
+        margin: 0;
+    }
+    .info{
+        float: none;
+        text-align: center;
+    }
+}
